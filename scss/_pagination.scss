@@ -1,0 +1,423 @@
+// 페이징
+.c-page {
+    $this: #{&};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 0;
+    column-gap: 6px;
+
+    @mixin pagerIcon($image: none) {
+        padding: 0;
+        background: center center / 20px auto url('../img/component/#{$image}.svg') no-repeat;;
+        &--disabled {
+            background-image: url('../img/component/#{$image}_disabled.svg');
+        }
+    }
+
+    a {
+        min-width: 28px;
+        height: 28px;
+        padding: 0 4px;
+        font-size: $font-13;
+        color: $gray-700;
+        line-height: 28px;
+        border-radius: 4px;
+        text-align: center;
+        box-sizing: border-box;
+
+        &.--active {
+            color: #fff;
+            background-color: $gray-500;
+        }
+
+        &:not(.--active):not([class*=--disabled]) {
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.03);
+                color: $gray-700;
+            }
+        } 
+    }
+
+    &__prev {
+        @include pagerIcon('ico_pagination_prev');
+        & + a {
+            margin-left: 18px;
+        }
+    }
+    &__first {
+        @include pagerIcon('ico_pagination_first'); 
+    }
+    &__next {
+        @include pagerIcon('ico_pagination_next');
+        @at-root #{$this} a + #{$this}__next {
+            margin-left: 18px;
+        }
+    }
+    &__last {
+        @include pagerIcon('ico_pagination_last');
+    }
+    &__ellipsis {
+        line-height: 28px;
+        display: inline-block;
+        vertical-align: middle;
+        color: $gray-700;
+        font-size: $font-13;
+        font-weight: 400;
+        padding: 0 4px;
+    }
+    &__total {
+        color: $gray-500;
+        padding: 0 4px;
+        @at-root #{$this}__total + #{$this}__next {
+            margin-left: 18px;
+        }
+    }
+    
+}
+
+/**/
+.c-swiper {
+    $this: #{&};
+    position: relative;
+    overflow: hidden;
+
+    // 기본 페이지스타일 mixin
+    // $img : 기본이미지, $lg : 큰사이즈이미지
+    @mixin pagerStyle($image: none, $position) {
+        position: absolute;
+        z-index: 10;
+        width: 48px;
+        height: 48px;
+        margin: 0;
+        inset: auto;
+        border-radius: 4px;
+        background-color: rgba(0, 0, 0, 0.3);
+        background-size: 26px auto;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-image: url('../img/component/#{$image}.svg');
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.45);
+        }
+        @at-root .c-swiper--sm .swiper-button-#{$position} {
+            width: 40px;
+            height: 40px;
+            background-size: 22px auto;
+            background-image: url('../img/component/#{$image}_sm.svg');
+        }
+    }
+
+    > .swiper-button-prev {
+        @include pagerStyle(ico_swiper_prev, prev);
+    }
+    > .swiper-button-next {
+        @include pagerStyle(ico_swiper_next, next);
+    }
+
+    //
+    // pager
+    > #{$this}__pager {
+
+        position: absolute;
+        z-index: 10;
+        display: inline-flex;
+        align-items: center;
+
+        .swiper-pagination-fraction {
+            width: auto;
+            font-size: $font-15;
+            color: $gray-600;
+            strong {
+                color: $gray-900;
+            }
+        }
+        
+        > button {
+            position: relative;
+            width: 32px;
+            height: 32px;
+            margin: 0;
+            inset: auto;
+            border: 1px solid $gray-300;
+            background-color: #fff;
+            background-image: none;
+            background-size: cover;
+            &::before {
+                display: inline-block;
+                width: 18px;
+                height: 18px;
+                vertical-align: middle;
+                background-position: center center;
+                background-size: 18px auto;
+                background-repeat: no-repeat;
+                content: '';
+            }
+            &:hover {
+                background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.03) 100%);
+            }
+            &.swiper-button-prev {
+                margin-left: 6px;
+                border-radius: 4px 0 0 4px;
+                &::before {
+                    background-image: url('../img/component/ico_swiperctrl_prev.svg');
+                }
+            }
+            &.swiper-button-next {
+                margin-left: -1px;
+                border-radius: 0 4px 4px 0;
+                &::before {
+                    background-image: url('../img/component/ico_swiperctrl_next.svg');
+                }
+            }
+        }
+    }
+
+    // control
+    > #{$this}__control {
+        position: absolute;
+        z-index: 10;
+        display: inline-flex;
+        align-items: center;
+        column-gap: 4px;
+    
+        #{$this}__pager {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: flex-end;
+            min-width: 124px;
+            height: 48px;
+            padding: 0 16px 0 24px;
+            background-color: rgba(0, 0, 0, 0.3);
+            box-sizing: border-box;
+            border-radius: 999px;
+    
+            .swiper-pagination-fraction {
+                color: #fff;
+                font-size: $font-15;
+                strong {
+                    color: inherit;
+                    padding-right: 2px;
+                }
+                span {
+                    padding-left: 2px;
+                }
+            }
+    
+            &::after {
+                position: absolute;
+                top: calc(50% - 8px);
+                right: 42px; 
+                width: 1px;
+                height: 16px;
+                background-color: rgba(255, 255, 255, 0.4);
+                content: '';
+            }
+    
+            > button {
+                position: static;
+                width: 20px;
+                height: 20px;
+                margin: 0;
+                border: none;
+                background-image: none;
+                background-color: transparent;
+                &::before {
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    background-size: 20px auto;
+                    content: '';
+                }
+                &:hover {
+                    background-image: none;
+                }
+                &.swiper-button-prev {
+                    &::before {
+                        background-image: url('../img/component/ico_swiperutil_prev.svg');
+                    }
+                }
+                &.swiper-button-next {
+                    margin-left: 13px;
+                    &::before {
+                        background-image: url('../img/component/ico_swiperutil_next.svg');
+                    }
+                }
+            }
+        }
+    
+        > button {
+            width: 48px;
+            height: 48px;
+            border-radius: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            &::before {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                vertical-align: middle;
+                background-position: center center;
+                background-size: 20px auto;
+                background-repeat: no-repeat;
+                content: '';
+            }
+            
+            &.more {
+                &::before {
+                    background-image: url('../img/component/ico_banner_more.svg');
+                }
+            }
+            &.pause {
+                &::before {
+                    background-image: url('../img/component/ico_swiper_pause.svg');
+                }
+            }
+            &.play {
+                &::before {
+                    background-image: url('../img/component/ico_swiper_play.svg');
+                }
+            }
+        }
+        
+        &--sm {
+            #{$this}__pager {
+                min-width: 95px;
+                height: 32px;
+                padding: 0 12px 0 16px;
+                
+                .swiper-pagination-fraction {
+                    font-size: $font-13;
+                }
+    
+                &::after {
+                    top: calc(50% - 6px);
+                    right: 32px;
+                    height: 12px;
+                }
+    
+                > button {
+                    width: 16px;
+                    height: 16px;
+                    border: none;
+                    &::before {
+                        width: 16px;
+                        height: 16px;
+                        background-size: 16px auto;
+                    }
+                    &.swiper-button-prev {
+                        margin-left: 4px;
+                        &::before {
+                            background-image: url('../img/component/ico_swiperutil_prev_sm.svg');
+                        }
+                    }
+                    &.swiper-button-next {
+                        margin-left: 9px;
+                        &::before {
+                            background-image: url('../img/component/ico_swiperutil_next_sm.svg');
+                        }
+                    }
+                }
+            }
+            > button {
+                width: 32px;
+                height: 32px;
+                &::before {
+                    width: 18px;
+                    height: 18px;
+                    background-size: 18px auto;
+                }
+            }
+        }
+    
+        &--outline {
+    
+            #{$this}__pager {
+                min-width: 95px;
+                height: 32px;
+                padding: 0 12px 0 16px;
+                border: 1px solid $gray-300;
+                background-color: #fff;   
+                
+                .swiper-pagination-fraction {
+                    color: $gray-900;
+                    font-size: $font-13;
+                } 
+    
+                &::after {
+                    top: calc(50% - 6px);
+                    right: 32px;
+                    height: 12px;
+                    background-color: rgba(0, 0, 0, 0.2);
+                }
+    
+                > button {
+                    width: 16px;
+                    height: 16px;
+                    border: none;
+                    &::before {
+                        width: 16px;
+                        height: 16px;
+                        background-size: 16px auto;
+                    }
+                    &.swiper-button-prev {
+                        margin-left: 4px;
+                        &::before {
+                            background-image: url('../img/component/ico_swiperutil_prev_outline.svg');
+                        }
+                    }
+                    &.swiper-button-next {
+                        margin-left: 9px;
+                        &::before {
+                            background-image: url('../img/component/ico_swiperutil_next_outline.svg');
+                        }
+                    }
+                }
+
+                &:hover {
+                    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.03) 100%);
+                }
+            }
+            > button {
+                width: 32px;
+                height: 32px;
+                border: 1px solid $gray-300;
+                background-color: #fff;
+                &::before {
+                    width: 18px;
+                    height: 18px;
+                    background-size: 18px auto;
+                }
+                &.more {
+                    &::before {
+                        background-image: url('../img/component/ico_banner_more_outline.svg');
+                    }
+                }
+                &.pause {
+                    &::before {
+                        background-image: url('../img/component/ico_swiper_pause_outline.svg');
+                    }
+                }
+                &.play {
+                    &::before {
+                        background-image: url('../img/component/ico_swiper_play_outline.svg');
+                    }
+                }
+                &:hover {
+                    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.03) 100%, #fff);
+                }
+            }
+    
+        }
+    
+        &:not(#{&}--outline) {
+            #{$this}__pager,
+            > button {
+                &:hover {
+                    background-color: rgba(0, 0, 0, 0.45);
+                }
+            }
+        }
+    }
+
+}

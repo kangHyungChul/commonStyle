@@ -1,0 +1,334 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>페이징 - Tmon UI 디자인 가이드</title>
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/component.css">
+
+<!-- Get lastest Jquery : https://cdnjs.com/libraries/jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<!-- Get lastest prism : https://cdnjs.com/libraries/prism -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/prism.min.js"></script>
+<!-- Get lastest clipboard.js : https://cdnjs.com/libraries/clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+</head>
+<style>
+    .c-swiper [class*=swiper-button] {
+        /* position: relative; */
+    }
+</style>
+
+<body>
+
+    <header id="header" class="guide-header">
+        <h1 class="guide-header__logo">
+            <a href="index.html" title="Home으로 이동"></a>
+        </h1>
+    </header>
+    
+    <div id="sidebar" class="sidebar sidebar--open">
+        <div class="vertical-scroll"> 
+            <ul class="side-gnb">
+                <li> 
+                    <a href="button.html" role="button" class="side-gnb__title side-gnb__title--active" title="Tmon PC">
+                        Tmon PC
+                    </a> 
+                </li>
+                <li>
+                    <a href="../../../m/html/_UI/Button.html" role="button" class="side-gnb__title" title="Tmon M">
+                        Tmon M
+                    </a>
+                </li> 
+            </ul>
+        </div>
+    </div>
+
+    <main class="guide-page">
+
+        <div class="guide-page__top">
+            <h2>Tmon UI 가이드라인</h2>
+        </div>
+
+        <!-- Tab : Main -->
+        <ul class="guide-page__tab">
+            <li><a href="button.html">Button</a></li>
+            <li><a href="form.html">Form</a></li>
+            <li><a href="tab.html">Tab</a></li>
+            <li><a href="popup.html">Dialog</a></li> 
+            <li><a href="pagination.html" class="--active">Pagination</a></li>
+            <li><a href="swiper.html">Swiper</a></li>
+            <li><a href="label.html">Label</a></li>
+            <li><a href="component.html">Component</a></li>
+        </ul>
+
+        <!-- 본문 -->
+        <section class="guide-section">
+
+            <h3 class="guide-section__title">Pagination</h3>
+            <p class="guide-section__text">게시판 pagination 가이드</p>
+
+            <div class="guide-row">
+
+                <!-- Default -->
+                <section class="guide-body">
+
+                    <h4 class="guide-body__title">Size</h4>
+                    
+                    <div class="guide-body__content">
+
+                        <ul class="guide-body__desc">
+                            <li>기본 <code>.c-page</code>으로 처리</li>
+                            <li>현재 선택된 페이지는 내부 <code>a</code>태그에 <code>--active</code> modifier추가 사용</li>
+                            <li>이전, 다음, 첫번째, 마지막 버튼들 비활성화는 <code>--disabled</code> modifier추가 사용</li>
+                        </ul>
+
+                        <table>
+                            <colgroup>
+                                <col style="width: 240px;">
+                                <col style="width: auto;">
+                                <col style="width: 30%;">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>Sample</th>
+                                    <th>Code</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>기본페이징</td>
+                                    <td>
+                                        <!-- 게시판 기본페이징 -->
+                                        <div class="guide-body__component">
+                                            <div class="c-page">
+                                                <a href="#" class="c-page__first"><span class="hide">처음페이지</span></a>
+                                                <a href="#" class="c-page__prev"><span class="hide">이전페이지</span></a>
+                                                <a href="#" class="--active">1</a>
+                                                <a href="#">2</a>
+                                                <a href="#">3</a>
+                                                <a href="#">4</a>
+                                                <a href="#">5</a>
+                                                <a href="#">6</a>
+                                                <a href="#">7</a>
+                                                <a href="#">8</a>
+                                                <a href="#">9</a>
+                                                <a href="#">10</a>
+                                                <a href="#" class="c-page__next"><span class="hide">다음페이지</span></a>
+                                                <a href="#" class="c-page__last"><span class="hide">마지막페이지</span></a>
+                                            </div>
+                                        </div>
+                                        <div class="guide-body__component">
+                                            <div class="c-page">
+                                                <a href="#" class="c-page__first c-page__first--disabled"><span class="hide">처음페이지</span></a>
+                                                <a href="#" class="c-page__prev c-page__prev--disabled"><span class="hide">이전페이지</span></a>
+                                                <a href="#" class="--active">1</a>
+                                                <a href="#">2</a>
+                                                <a href="#">3</a>
+                                                <a href="#">4</a>
+                                                <a href="#">5</a>
+                                                <a href="#">6</a>
+                                                <a href="#">7</a>
+                                                <a href="#">8</a>
+                                                <a href="#">9</a>
+                                                <a href="#">10</a>
+                                                <a href="#" class="c-page__next c-page__next--disabled"><span class="hide">다음페이지</span></a>
+                                                <a href="#" class="c-page__last c-page__last--disabled"><span class="hide">마지막페이지</span></a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+<div class="code-box-copy">
+<button class="code-box-copy__btn" data-clipboard-target="#pagination" title="Copy"></button>
+<pre><code class="language-html" id="pagination">&lt;div class="c-page"&gt;
+    &lt;a href="#" class="c-page__first"&gt;&lt;span class="hide"&gt;처음페이지&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="#" class="c-page__prev"&gt;&lt;span class="hide"&gt;이전페이지&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="#" class="--active"&gt;1&lt;/a&gt;
+    &lt;a href="#"&gt;2&lt;/a&gt;
+    &lt;a href="#"&gt;3&lt;/a&gt;
+    &lt;a href="#"&gt;4&lt;/a&gt;
+    &lt;a href="#"&gt;5&lt;/a&gt;
+    &lt;a href="#"&gt;6&lt;/a&gt;
+    &lt;a href="#"&gt;7&lt;/a&gt;
+    &lt;a href="#"&gt;8&lt;/a&gt;
+    &lt;a href="#"&gt;9&lt;/a&gt;
+    &lt;a href="#"&gt;10&lt;/a&gt;
+    &lt;a href="#" class="c-page__next"&gt;&lt;span class="hide"&gt;다음페이지&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="#" class="c-page__last"&gt;&lt;span class="hide"&gt;마지막페이지&lt;/span&gt;&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+</div>
+                                    </td>
+                                        
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                        <table>
+                            <colgroup>
+                                <col style="width: 240px;">
+                                <col style="width: auto;">
+                                <col style="width: 30%;">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>Sample</th>
+                                    <th>Code</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>검색 페이지용</td>
+                                    <td>
+                                        <!-- 게시판 검색 페이지용 -->
+                                        <div class="guide-body__component"> 
+                                            <div class="c-page c-page--search">
+                                                <a href="#" class="c-page__prev"><span class="hide">이전페이지</span></a>
+                                                <a href="#" class="--active">1</a>
+                                                <span class="c-page__ellipsis">&middot;&middot;&middot;</span>
+                                                <a href="#">2</a>
+                                                <a href="#">3</a>
+                                                <a href="#">4</a>
+                                                <a href="#">5</a>
+                                                <a href="#">6</a>
+                                                <a href="#">7</a>
+                                                <a href="#">8</a>
+                                                <a href="#">9</a>
+                                                <a href="#">10</a>
+                                                <span class="c-page__ellipsis">&middot;&middot;&middot;</span>
+                                                <span class="c-page__total">8629</span>
+                                                <a href="#" class="c-page__next"><span class="hide">다음페이지</span></a>
+                                            </div>
+                                        </div>
+                                        <div class="guide-body__component">
+                                            <div class="c-page">
+                                                <a href="#" class="c-page__prev c-page__prev--disabled"><span class="hide">이전페이지</span></a>
+                                                <a href="#" class="--active">1</a>
+                                                <span class="c-page__ellipsis">&middot;&middot;&middot;</span>
+                                                <a href="#">2</a>
+                                                <a href="#">3</a>
+                                                <a href="#">4</a>
+                                                <a href="#">5</a>
+                                                <a href="#">6</a>
+                                                <a href="#">7</a>
+                                                <a href="#">8</a>
+                                                <a href="#">9</a>
+                                                <a href="#">10</a>
+                                                <span class="c-page__ellipsis">&middot;&middot;&middot;</span>
+                                                <span class="c-page__total">8629</span>
+                                                <a href="#" class="c-page__next c-page__next--disabled"><span class="hide">다음페이지</span></a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+<div class="code-box-copy">
+<button class="code-box-copy__btn" data-clipboard-target="#pagination2" title="Copy"></button>
+<pre><code class="language-html" id="pagination2">&lt;div class="c-page"&gt;
+        &lt;a href="#" class="c-page__prev"&gt;&lt;span class="hide"&gt;이전페이지&lt;/span&gt;&lt;/a&gt;
+        &lt;a href="#" class="--active"&gt;1&lt;/a&gt;
+        &lt;span class="c-page__ellipsis"&gt;&middot;&middot;&middot;&lt;/span&gt;
+        &lt;a href="#"&gt;2&lt;/a&gt;
+        &lt;a href="#"&gt;3&lt;/a&gt;
+        &lt;a href="#"&gt;4&lt;/a&gt;
+        &lt;a href="#"&gt;5&lt;/a&gt;
+        &lt;a href="#"&gt;6&lt;/a&gt;
+        &lt;a href="#"&gt;7&lt;/a&gt;
+        &lt;a href="#"&gt;8&lt;/a&gt;
+        &lt;a href="#"&gt;9&lt;/a&gt;
+        &lt;a href="#"&gt;10&lt;/a&gt;
+        &lt;span class="c-page__ellipsis"&gt;&middot;&middot;&middot;&lt;/span&gt;
+        &lt;span class="c-page__total"&gt;8629&lt;/span&gt;
+        &lt;a href="#" class="c-page__next"&gt;&lt;span class="hide"&gt;다음페이지&lt;/span&gt;&lt;/a&gt;
+    &lt;/div&gt;</code></pre>
+</div>
+                                    </td>
+                                        
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+        (function($, undefined) {
+
+            var pluginName = 'codeBoxCopy',
+                defaults = {
+                    tooltipText: 'Copied',
+                    tooltipShowTime: 1000,
+                    tooltipFadeInTime: 300,
+                    tooltipFadeOutTime: 300
+                };
+
+            function Plugin(element, options) {
+                this.element = element;
+                this.options = $.extend({}, defaults, options);
+                this._defaults = defaults;
+                this._name = pluginName;
+                this.init();
+            }
+
+            Plugin.prototype = {
+
+                init: function() {
+
+                    var $btn, $tooltip, btn, tooltip, opts, clipboard;
+
+                    btn = this.element.querySelector('.code-box-copy__btn');
+
+                    if (!btn) return;
+
+                    opts = this.options;
+                    clipboard = new Clipboard(btn);
+
+                    clipboard.on('success', function(e) {
+                        $btn = $(e.trigger);
+                        $btn.prop('disabled', true);
+
+                        tooltip = '<span class="code-box-copy__tooltip">';
+                        tooltip += opts.tooltipText;
+                        tooltip += '</span>';
+                        $(tooltip).prependTo($btn);
+                        $tooltip = $btn.find('.code-box-copy__tooltip');
+                        $tooltip.fadeIn(opts.tooltipFadeInTime);
+
+                        setTimeout(function() {
+                            $tooltip.fadeOut(opts.tooltipFadeOutTime, function() {
+                                $tooltip.remove();
+                            });
+                            $btn.prop('disabled', false);
+                        }, opts.tooltipShowTime);
+                    });
+                }
+            };
+
+            $.fn[pluginName] = function(options) {
+                return this.each(function() {
+                    if (!$.data(this, 'plugin_' + pluginName)) {
+                        $.data(this, 'plugin_' + pluginName,
+                            new Plugin(this, options));
+                    }
+                });
+            };
+        })(jQuery);
+        $('.code-box-copy').codeBoxCopy({
+            tooltipText: 'Copied',
+            tooltipShowTime: 500,
+            tooltipFadeInTime: 500,
+            tooltipFadeOutTime: 700
+        });;
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,692 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>버튼 - Tmon UI 디자인 가이드</title>
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/component.css">
+
+<!-- Get lastest Jquery : https://cdnjs.com/libraries/jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<!-- Get lastest prism : https://cdnjs.com/libraries/prism -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/prism.min.js"></script>
+<!-- Get lastest clipboard.js : https://cdnjs.com/libraries/clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+</head>
+<body>
+
+    <header id="header" class="guide-header">
+        <h1 class="guide-header__logo">
+            <a href="index.html" title="Home으로 이동"></a>
+        </h1>
+    </header>
+    
+    <div id="sidebar" class="sidebar sidebar--open">
+        <div class="vertical-scroll"> 
+            <ul class="side-gnb">
+                <li> 
+                    <a href="button.html" role="button" class="side-gnb__title side-gnb__title--active" title="Tmon PC">
+                        Tmon PC
+                    </a> 
+                </li>
+                <li>
+                    <a href="../../../m/html/_UI/Button.html" role="button" class="side-gnb__title" title="Tmon M">
+                        Tmon M
+                    </a>
+                </li> 
+            </ul>
+        </div>
+    </div>
+
+    <main class="guide-page">
+
+        <div class="guide-page__top">
+            <h2>Tmon UI 가이드라인</h2>
+        </div>
+
+        <!-- Tab : Main -->
+        <ul class="guide-page__tab">
+            <li><a href="button.html" class="--active">Button</a></li>
+            <li><a href="form.html">Form</a></li>
+            <li><a href="tab.html">Tab</a></li>
+            <li><a href="popup.html">Dialog</a></li> 
+            <li><a href="pagination.html">Pagination</a></li>
+            <li><a href="swiper.html">Swiper</a></li>
+            <li><a href="label.html">Label</a></li>
+            <li><a href="component.html">Component</a></li>
+        </ul>
+
+        <!-- 본문 -->
+        <section class="guide-section">
+
+            <h3 class="guide-section__title">PC Button</h3>
+            <p class="guide-section__text">
+                가장 기본적인 UI 요소로 화면을 전환하거나 새로운 정보를 호출<br><code>.c-button</code>클래스를 기본으로 사용</p>
+
+            <div class="guide-row">
+
+                <!-- size -->
+                <section class="guide-body">
+
+                    <h4 class="guide-body__title">Size</h4>
+                    
+                    <div class="guide-body__content">
+
+                        <ul class="guide-body__desc">
+                            <li><code>.c-button--#{size}</code> modifier을 추가하여 사용</li>
+                            <li>Default사이즈는 md(40)로 별도의 modifier없이 사용</li>
+                        </ul>
+
+                        <table>
+                            <colgroup>
+                                <col style="width: 240px;">
+                                <col style="width: auto;">
+                                <col style="width: 30%;">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>Sample</th>
+                                    <th>Code</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>xl (64)</td>
+                                    <td>
+                                        <button type="button" class="c-button c-button--xl">버튼</button>
+                                    </td>
+                                    <td>
+<div class="code-box-copy">
+<button class="code-box-copy__btn" data-clipboard-target="#button-size-xl" title="Copy"></button>
+<pre><code class="language-html" id="button-size-xl">&lt;button type="button" class="c-button c-button--xl"&gt;버튼&lt;/button&gt;</code></pre>
+</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>lg (48)</td>
+                                    <td>
+                                        <button type="button" class="c-button c-button--lg">버튼</button>
+                                    </td>
+                                    <td>
+<div class="code-box-copy">
+<button class="code-box-copy__btn" data-clipboard-target="#button-size-lg" title="Copy"></button>
+<pre><code class="language-html" id="button-size-lg">&lt;button type="button" class="c-button c-button--lg"&gt;버튼&lt;/button&gt;</code></pre>
+</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>md (40) / 기본</td>
+                                    <td>
+                                        <button type="button" class="c-button">버튼</button>
+                                    </td>
+                                    <td>
+<div class="code-box-copy">
+<button class="code-box-copy__btn" data-clipboard-target="#button-size-default" title="Copy"></button>
+<pre><code class="language-html" id="button-size-default">&lt;button type="button" class="c-button"&gt;버튼&lt;/button&gt;</code></pre>
+</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>sm (32)</td>
+                                    <td>
+                                        <button type="button" class="c-button c-button--sm">버튼</button>
+                                    </td>
+                                    <td>
+<div class="code-box-copy">
+<button class="code-box-copy__btn" data-clipboard-target="#button-size-sm" title="Copy"></button>
+<pre><code class="language-html" id="button-size-sm">&lt;button type="button" class="c-button c-button--sm"&gt;버튼&lt;/button&gt;</code></pre>
+</div>
+                                    </td>
+                                <tr>
+                                    <td>xs (28)</td>
+                                    <td>
+                                        <button type="button" class="c-button c-button--xs">버튼</button>
+                                    </td>
+                                    <td>
+<div class="code-box-copy">
+<button class="code-box-copy__btn" data-clipboard-target="#button-size-xs" title="Copy"></button>
+<pre><code class="language-html" id="button-size-xs">&lt;button type="button" class="c-button c-button--xs"&gt;버튼&lt;/button&gt;</code></pre>
+</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>xxs (24)</td>
+                                    <td>
+                                        <button type="button" class="c-button c-button--xxs">버튼</button>
+                                    </td>
+                                    <td>
+<div class="code-box-copy">
+<button class="code-box-copy__btn" data-clipboard-target="#button-size-xxs" title="Copy"></button>
+<pre><code class="language-html" id="button-size-xxs">&lt;button type="button" class="c-button c-button--xxs"&gt;버튼&lt;/button&gt;</code></pre>
+</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table> 
+
+                    </div>
+
+                </section>
+
+                <!-- style -->
+                <section class="guide-body">
+
+                    <h4 class="guide-body__title">Style</h4>
+
+                    <div class="guide-body__content">
+
+                        <ul class="guide-body__desc">
+                            <li><code>.c-button--#{style}</code> modifier을 추가하여 사용</li>
+                            <li>Default스타일은 별도 modifier없이 사용</li>
+                            <li>disabled상태는 disabled속성을 추가</li>
+                        </ul>
+
+                        <table>
+                            <colgroup>
+                                <col style="width: 240px;">
+                                <col style="width: auto;">
+                                <col style="width: 30%;">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>Sample</th>
+                                    <th>Code</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Default</td>
+                                    <td>
+                                        <button type="button" class="c-button">Default</button>
+                                        <button type="button" class="c-button" disabled>Default - Disabled</button>
+                                    </td>
+                                    <td>
+<div class="code-box-copy">
+<button class="code-box-copy__btn" data-clipboard-target="#button-style-default" title="Copy"></button>
+<pre><code class="language-html" id="button-style-default">&lt;button type="button" class="c-button"&gt;Default&lt;/button&gt;</code></pre>
+</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>primary</td>
+                                    <td>
+                                        <button type="button" class="c-button c-button--primary">Primary</button>
+                                        <button type="button" class="c-button c-button--primary" disabled>Primary - Disabled</button>
+                                    </td>
+                                    <td>
+<div class="code-box-copy">
+<button class="code-box-copy__btn" data-clipboard-target="#button-style-primary" title="Copy"></button>
+<pre><code class="language-html" id="button-style-primary">&lt;button type="button" class="c-button c-button--primary"&gt;Primary&lt;/button&gt;</code></pre>
+</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>secondary</td>
+                                    <td>
+                                        <button type="button" class="c-button c-button--secondary">Secondary</button>
+                                        <button type="button" class="c-button c-button--secondary" disabled>Secondary - Disabled</button>
+                                    </td>
+                                    <td>
+<div class="code-box-copy">
+<button class="code-box-copy__btn" data-clipboard-target="#button-style-secondary" title="Copy"></button>
+<pre><code class="language-html" id="button-style-secondary">&lt;button type="button" class="c-button c-button--secondary"&gt;Secondary&lt;/button&gt;</code></pre>
+</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>round</td>
+                                    <td>
+                                        <button type="button" class="c-button c-button--xl c-button--round">Round/xl</button>
+                                        <button type="button" class="c-button c-button--round">Round/md</button>
+                                        <button type="button" class="c-button c-button--sm c-button--round">Round/sm</button>
+                                        <button type="button" class="c-button c-button--xs c-button--round">Round/xs</button>
+                                        <button type="button" class="c-button c-button--xxs c-button--round">Round/xxs</button>
+                                    </td>
+                                    <td>
+<div class="code-box-copy">
+<button class="code-box-copy__btn" data-clipboard-target="#button-style-round" title="Copy"></button>
+<pre><code class="language-html" id="button-style-round">&lt;button type="button" class="c-button c-button--round"&gt;Round/md&lt;/button&gt;</code></pre>
+</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table> 
+
+                    </div>
+
+                </section>
+
+            </div>
+
+            <div class="guide-row">
+
+                <!-- Text + Icon -->
+                <section class="guide-body">
+
+                    <h4 class="guide-body__title">Text + Icon</h4>
+                    
+                    <div class="guide-body__content">
+
+                        <ul class="guide-body__desc">
+                            <li>버튼 내에 텍스트와 아이콘의 조합일 경우 사용</li>
+                            <li>버튼 내부의 텍스트 앞이나 뒤에 <code>i.#{icon}</code>을 추가하여 사용</li>
+                        </ul>
+
+                        <table>
+                            <colgroup>
+                                <col style="width: 240px;">
+                                <col style="width: auto;">
+                                <col style="width: 30%;">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>Sample</th>
+                                    <th>Code</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Left Icon</td>
+                                    <td>
+                                        <button type="button" class="c-button c-button--xl">
+                                            <i class="arrowleft"></i><span>버튼</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--lg">
+                                            <i class="arrowleft"></i><span>버튼</span>
+                                        </button>
+                                        <button type="button" class="c-button">
+                                            <i class="arrowleft"></i><span>버튼</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--sm">
+                                            <i class="arrowleft"></i><span>버튼</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--xs">
+                                            <i class="arrowleft"></i><span>버튼</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--xxs">
+                                            <i class="arrowleft"></i><span>버튼</span>
+                                        </button>
+                                    </td>
+                                    <td>
+<div class="code-box-copy">
+<button class="code-box-copy__btn" data-clipboard-target="#button-ti-left" title="Copy"></button>
+<pre><code class="language-html" id="button-ti-left">&lt;button type="button" class="c-button"&gt;
+    &lt;i class="arrowleft"&gt;&lt;/i&gt;&lt;span&gt;버튼&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Right Icon</td>
+                                    <td>
+                                        <button type="button" class="c-button c-button--xl">
+                                            <span>버튼</span><i class="arrowright"></i>
+                                        </button>
+                                        <button type="button" class="c-button c-button--lg">
+                                            <span>버튼</span><i class="arrowright"></i>
+                                        </button>
+                                        <button type="button" class="c-button">
+                                            <span>버튼</span><i class="arrowright"></i>
+                                        </button>
+                                        <button type="button" class="c-button c-button--sm">
+                                            <span>버튼</span><i class="arrowright"></i>
+                                        </button>
+                                        <button type="button" class="c-button c-button--xs">
+                                            <span>버튼</span><i class="arrowright"></i>
+                                        </button>
+                                        <button type="button" class="c-button c-button--xxs">
+                                            <span>버튼</span><i class="arrowright"></i>
+                                        </button>
+                                    </td>
+                                    <td>
+<div class="code-box-copy">
+<button class="code-box-copy__btn" data-clipboard-target="#button-ti-right" title="Copy"></button>
+<pre><code class="language-html" id="button-ti-right">&lt;button type="button" class="c-button"&gt;
+    &lt;span&gt;버튼&lt;/span&gt;&lt;i class="arrowright"&gt;&lt;/i&gt;
+&lt;/button&gt;</code></pre>
+</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Left Icon</td>
+                                    <td>
+                                        <button type="button" class="c-button c-button--primary c-button--xl">
+                                            <i class="arrowleft"></i><span>버튼</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--primary c-button--lg">
+                                            <i class="arrowleft"></i><span>버튼</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--primary">
+                                            <i class="arrowleft"></i><span>버튼</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--primary c-button--sm">
+                                            <i class="arrowleft"></i><span>버튼</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--primary c-button--xs">
+                                            <i class="arrowleft"></i><span>버튼</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--primary c-button--xxs">
+                                            <i class="arrowleft"></i><span>버튼</span>
+                                        </button>
+                                    </td>
+                                    <td>
+<div class="code-box-copy">
+<button class="code-box-copy__btn" data-clipboard-target="#button-ti-left-p" title="Copy"></button>
+<pre><code class="language-html" id="button-ti-left-p">&lt;button type="button" class="c-button c-button--primary"&gt;
+    &lt;i class="arrowleft"&gt;&lt;/i&gt;&lt;span&gt;버튼&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Left Icon</td>
+                                    <td>
+                                        <button type="button" class="c-button c-button--secondary c-button--xl">
+                                            <i class="arrowleft"></i><span>버튼</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--secondary c-button--lg">
+                                            <i class="arrowleft"></i><span>버튼</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--secondary">
+                                            <i class="arrowleft"></i><span>버튼</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--secondary c-button--sm">
+                                            <i class="arrowleft"></i><span>버튼</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--secondary c-button--xs">
+                                            <i class="arrowleft"></i><span>버튼</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--secondary c-button--xxs">
+                                            <i class="arrowleft"></i><span>버튼</span>
+                                        </button>
+                                    </td>
+                                    <td>
+<div class="code-box-copy">
+<button class="code-box-copy__btn" data-clipboard-target="#button-ti-left-s" title="Copy"></button>
+<pre><code class="language-html" id="button-ti-left-s">&lt;button type="button" class="c-button c-button--secondary"&gt;
+    &lt;i class="arrowleft"&gt;&lt;/i&gt;&lt;span&gt;버튼&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table> 
+
+                    </div>
+
+                </section>
+
+            </div>
+
+            <div class="guide-row">
+
+                <!-- only icon -->
+                <section class="guide-body">
+
+                    <h4 class="guide-body__title">Only Icon</h4>
+                    
+                    <div class="guide-body__content">
+
+                        <ul class="guide-body__desc">
+                            <li><code>.c-button--icon</code> modifier추가하여 사용</li>
+                            <li>완전 원형 버튼은 <code>.c-button--circle</code> modifier추가하여 사용</li>
+                            <li>아이콘은 버튼 내부에<code>i.#{icon}</code>을 추가</li>
+                            <li>아이콘 뒤에 <code>span.hide</code>로 대체텍스트를 포함시켜야 함</li>
+                        </ul>
+
+                        <table>
+                            <colgroup>
+                                <col style="width: 25%;">
+                                <col style="width: 40%;">
+                                <col style="width: 35%;">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>Sample</th>
+                                    <th>Code</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Icon 단독</td>
+                                    <td>
+                                        <button type="button" class="c-button c-button--icon c-button--xxs">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--icon c-button--xs">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--icon c-button--sm">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--icon">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--icon c-button--lg">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--icon c-button--xl">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </button>
+                                    </td>
+                                    <td>
+<div class="code-box-copy">
+    <button class="code-box-copy__btn" data-clipboard-target="#button-only-left" title="Copy"></button>
+    <pre><code class="language-html" id="button-only-left">&lt;button type="button" class="c-button c-button--icon"&gt;
+    &lt;i class="arrowleft"&gt;&lt;/i&gt;&lt;span class="hide"&gt;아이콘단독대체텍스트&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Icon 단독</td>
+                                    <td>
+                                        <a href="#" class="c-button c-button--icon c-button--xxs">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </a>
+                                        <a href="#" class="c-button c-button--icon c-button--xs">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </a>
+                                        <a href="#" class="c-button c-button--icon c-button--sm">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </a>
+                                        <a href="#" class="c-button c-button--icon">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </a>
+                                        <a href="#" class="c-button c-button--icon c-button--lg">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </a>
+                                        <a href="#" class="c-button c-button--icon c-button--xl">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </a>
+                                    </td>
+                                    <td>
+<div class="code-box-copy">
+    <button class="code-box-copy__btn" data-clipboard-target="#button-only-left-a" title="Copy"></button>
+    <pre><code class="language-html" id="button-only-left-a">&lt;a href="#" class="c-button c-button--icon"&gt;
+    &lt;i class="arrowleft"&gt;&lt;/i&gt;&lt;span class="hide"&gt;아이콘단독대체텍스트&lt;/span&gt;
+&lt;/a&gt;</code></pre>
+</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Icon 단독</td>
+                                    <td>
+                                        <button type="button" class="c-button c-button--icon c-button--primary c-button--xxs">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--icon c-button--primary c-button--xs">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--icon c-button--primary c-button--sm">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--icon c-button--primary">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--icon c-button--primary c-button--lg">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--icon c-button--primary c-button--xl">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </button>
+                                    </td>
+                                    <td>
+<div class="code-box-copy">
+    <button class="code-box-copy__btn" data-clipboard-target="#button-only-left-p" title="Copy"></button>
+    <pre><code class="language-html" id="button-only-left-p">&lt;button type="button" class="c-button c-button--icon c-button--primary"&gt;
+    &lt;i class="arrowleft"&gt;&lt;/i&gt;&lt;span class="hide"&gt;아이콘단독대체텍스트&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Icon 단독</td>
+                                    <td>
+                                        <button type="button" class="c-button c-button--icon c-button--secondary c-button--xxs">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--icon c-button--secondary c-button--xs">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--icon c-button--secondary c-button--sm">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--icon c-button--secondary">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--icon c-button--secondary c-button--lg">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--icon c-button--secondary c-button--xl">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </button>
+                                    </td>
+                                    <td>
+<div class="code-box-copy">
+    <button class="code-box-copy__btn" data-clipboard-target="#button-only-left-s" title="Copy"></button>
+    <pre><code class="language-html" id="button-only-left-s">&lt;button type="button" class="c-button c-button--icon c-button--secondary"&gt;
+    &lt;i class="arrowleft"&gt;&lt;/i&gt;&lt;span class="hide"&gt;아이콘단독대체텍스트&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Icon 단독 / 원형</td>
+                                    <td>
+                                        <button type="button" class="c-button c-button--icon c-button--circle c-button--xxs">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--icon c-button--circle c-button--xs">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--icon c-button--circle c-button--sm">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--icon c-button--circle">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--icon c-button--circle c-button--lg">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </button>
+                                        <button type="button" class="c-button c-button--icon c-button--circle c-button--xl">
+                                            <i class="arrowleft"></i><span class="hide">아이콘단독대체텍스트</span>
+                                        </button>
+                                    </td>
+                                    <td>
+<div class="code-box-copy">
+    <button class="code-box-copy__btn" data-clipboard-target="#button-only-left-c" title="Copy"></button>
+    <pre><code class="language-html" id="button-only-left-c">&lt;button type="button" class="c-button c-button--icon c-button--circle"&gt;
+    &lt;i class="arrowleft"&gt;&lt;/i&gt;&lt;span class="hide"&gt;아이콘단독대체텍스트&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+        (function($, undefined) {
+
+            var pluginName = 'codeBoxCopy',
+                defaults = {
+                    tooltipText: 'Copied',
+                    tooltipShowTime: 1000,
+                    tooltipFadeInTime: 300,
+                    tooltipFadeOutTime: 300
+                };
+
+            function Plugin(element, options) {
+                this.element = element;
+                this.options = $.extend({}, defaults, options);
+                this._defaults = defaults;
+                this._name = pluginName;
+                this.init();
+            }
+
+            Plugin.prototype = {
+
+                init: function() {
+
+                    var $btn, $tooltip, btn, tooltip, opts, clipboard;
+
+                    btn = this.element.querySelector('.code-box-copy__btn');
+
+                    if (!btn) return;
+
+                    opts = this.options;
+                    clipboard = new Clipboard(btn);
+
+                    clipboard.on('success', function(e) {
+                        $btn = $(e.trigger);
+                        $btn.prop('disabled', true);
+
+                        tooltip = '<span class="code-box-copy__tooltip">';
+                        tooltip += opts.tooltipText;
+                        tooltip += '</span>';
+                        $(tooltip).prependTo($btn);
+                        $tooltip = $btn.find('.code-box-copy__tooltip');
+                        $tooltip.fadeIn(opts.tooltipFadeInTime);
+
+                        setTimeout(function() {
+                            $tooltip.fadeOut(opts.tooltipFadeOutTime, function() {
+                                $tooltip.remove();
+                            });
+                            $btn.prop('disabled', false);
+                        }, opts.tooltipShowTime);
+                    });
+                }
+            };
+
+            $.fn[pluginName] = function(options) {
+                return this.each(function() {
+                    if (!$.data(this, 'plugin_' + pluginName)) {
+                        $.data(this, 'plugin_' + pluginName,
+                            new Plugin(this, options));
+                    }
+                });
+            };
+        })(jQuery);
+        $('.code-box-copy').codeBoxCopy({
+            tooltipText: 'Copied',
+            tooltipShowTime: 500,
+            tooltipFadeInTime: 500,
+            tooltipFadeOutTime: 700
+        });;
+    </script>
+</body>
+</html>

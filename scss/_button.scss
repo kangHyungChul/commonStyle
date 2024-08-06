@@ -1,0 +1,262 @@
+@use "sass:math";
+@use "sass:string";
+@use 'sass:list';
+@use 'sass:map';
+
+// 버튼 크기
+$buttonSize: (
+    // 1. 클래스, 2. 높이, 3. padding, 4. 폰트크기, 5. radius(기본 4px: null), 6. 아이콘여백(기본4px: null), 7. 아이콘크기(기본), 8. 아이콘크기(전용)
+    (xl, 64px, 0 24px, $font-19, 6px, 6px, 24px, 34px),
+    (lg, 48px, 0 20px, $font-15, null, null, 20px, 26px),
+    (sm, 32px, 0 12px, $font-13, null, null, 16px, 18px),
+    (xs, 28px, 0 10px, $font-12, null, null, 14px, 16px),
+    (xxs, 24px, 0 8px, $font-11, null, 2px, 12px, 14px),
+);
+
+// 아이콘 + 텍스트 타입
+// 아이콘명, 사이즈, bg타입(기본 mask, bg타입 true시 background이미지 사용)
+// 각 색상 내부에 사용할 사이즈 기입 (xl, lg, md, sm, xs, xxs)
+// md값이 기본임
+$btnIconTypeDefault: (
+    (icon: arrowright, size: (xl, lg, md, sm, xs, xxs)),
+    (icon: searchback, size: (md)),
+    (icon: planwish, size: (xs)),
+    (icon: photoreview, size: (sm)),
+    (icon: filterreset, size: (sm)),
+);
+
+// 아이콘 전용
+// 아이콘명, 사이즈, bg타입(기본 mask, bg타입 true시 background이미지 사용)
+// 각 색상 내부에 사용할 사이즈 기입 (xl, lg, md, sm, xs, xxs)
+// md값이 기본임
+$btnIconTypeOnly: (
+    (icon: arrowright, size: (xl, lg, md, sm, xs, xxs)),
+    (icon: shareband, size: (xs), bg: true),
+    (icon: sharefb, size: (xs), bg: true),
+    (icon: sharekakaostory, size: (xs), bg: true),
+    (icon: sharelink, size: (xs)),
+);
+
+// 아이콘세팅 mixin
+// $size: xl, lg, md, sm, xs, xxs
+// $type: default, only (기본, 아이콘전용)
+// 파일경로 및 파일명구조 
+// ../img/component/btn_#{아이콘명}_#{사이즈(lg, md 등..)).svg
+@mixin setIconBtn($size, $type) {
+
+    $useIconList: $btnIconTypeDefault;
+    $typeUrl: '../img/component/btn_'; // 기본타입파일경로 btn_로 시작
+
+    @if ($type == only) {
+        $useIconList: $btnIconTypeOnly;
+        $typeUrl: '../img/component/btn_only_'; // 아이콘전용파일경로 btn_only_로 시작
+    }
+
+    @each $list in $useIconList {
+        $icon: map.get($list, icon);
+        // 호출사이즈와 배열내 사용사이즈 존재여부 체크 후 없으면 X, 있으면 사용
+        @if (index(map.get($list, size), $size)) {
+            i.#{$icon} {
+                // bg타입 사용안하면 mask사용(기본값)
+                // bg타입 true시 background사용
+                @if(map.get($list, bg)) {
+                    background: transparent center center / contain url('#{$typeUrl}#{str-replace($icon, "-", "_")}_#{$size}.svg') no-repeat; // 타입파일경로+아이콘명_사이즈(md 등..)
+                } @else {
+                    mask-image: url('#{$typeUrl}#{str-replace($icon, "-", "_")}_#{$size}.svg'); // 타입파일경로+아이콘명_사이즈(md 등..)
+                }
+            }
+        }
+
+    }
+
+}
+
+// 버튼박스
+.c-buttonbox {
+    display: flex;
+    justify-content: flex-start;
+    row-gap: 8px;
+    width: 100%;
+
+    .c-button {
+        flex:1;
+        & + .c-button {
+            margin-left: 8px;
+        }
+        & + .c-button--sm, 
+        & + .c-button--xs,
+        & + .c-button--xxs {
+            margin-left: 4px;
+        }
+    }
+}
+
+// 버튼
+.c-button {
+    $this: #{&};
+    height: 40px;
+    padding: 0 16px;
+    color: $gray-800;
+    font-size: $font-14;
+    font-weight: 600;
+    line-height: normal;
+    border: 1px solid $gray-400;
+    background-color: #fff;
+    border-radius: 4px;
+    box-sizing: border-box;
+    white-space: nowrap;
+
+    @at-root a#{&} {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        column-gap: 4px;
+    }
+
+    &:not(:disabled) {
+        &:hover {
+            background-color: #f7f7f7;
+        }
+    }
+
+    span {
+        vertical-align: middle;
+    }
+    i {
+        display: inline-block;
+        vertical-align: middle;
+        mask-size: contain;
+        mask-repeat: no-repeat;
+        mask-position: center center;
+        background-color: $gray-800;
+    }
+
+    &--icon {
+        width: 40px;
+        padding: 0;
+        i {
+            width: 22px;
+            height: 22px;
+        }
+        @include setIconBtn(md, only); // 아이콘세팅 호출부 setIconBtn(사이즈(md), 아이콘전용타입(only))
+    }
+
+    &:not([class*=--icon]) {
+        i {
+            width: 18px;
+            height: 18px;
+        }
+        @include setIconBtn(md, default); // 아이콘세팅 호출부 setIconBtn(사이즈(md), 아이콘전용타입(default))
+        i + span,
+        span + i {
+            margin-left: 4px
+        }
+    }
+
+    // 비활성화
+    &--disabled,
+    &:disabled {
+        border-color: $gray-200;
+        color: $gray-300;
+        i {
+            background-color: $gray-300;
+        }
+    }
+
+    // 사이즈
+    @each $data in $buttonSize {
+        &--#{nth($data, 1)} {
+            height: #{nth($data, 2)};
+            padding: #{nth($data, 3)};
+            font-size: #{nth($data, 4)};
+            border-radius: #{nth($data, 5)};
+
+            @at-root a#{&} {
+                column-gap: #{nth($data, 6)};
+            }
+            
+            &:not([class*=--icon]){
+                i {
+                    width: #{nth($data, 7)};
+                    height: #{nth($data, 7)};
+                }
+                @include setIconBtn(#{nth($data, 1)}, default);  // 아이콘세팅 호출부 setIconBtn(사이즈(변수호출), 아이콘전용타입(default))
+            }
+
+            &#{$this}--icon {
+                width: #{nth($data, 2)};
+                padding: 0;
+                i {
+                    width: #{nth($data, 8)};
+                    height: #{nth($data, 8)};
+                }
+                @include setIconBtn(#{nth($data, 1)}, only);  // 아이콘세팅 호출부 setIconBtn(사이즈(변수호출), 아이콘전용타입(only))
+            }
+
+        } 
+
+    }
+
+    // 색상
+    &--primary {
+        background-color: $color-orange;
+        border-color: $color-orange;
+        color: #fff;
+        i {
+            background-color: #fff;
+        }
+        &:not(:disabled),
+        &:not(#{$this}--disabled) {
+            &:hover {
+                background-color: #e37232;
+            }
+        }
+
+        @at-root {
+            #{$this}--disabled#{&},
+            #{$this}:disabled#{&} {
+                color: $gray-400;
+                background-color: $gray-100;
+                border-color: $gray-100;
+                i {
+                    background-color: $gray-400;
+                }
+            }
+        }
+    }
+    &--secondary {
+        border-color: $color-orange;
+        color: $color-orange;
+        i {
+            background-color: $color-orange;
+        }
+        &:not(:disabled),
+        &:not(#{$this}--disabled) {
+            &:hover {
+                background-color: #fef7f3;
+            }
+        }
+    }
+
+    // 기타 옵션들
+    &--full {
+        width: 100%;
+    }
+
+    &--round {
+        border-radius: 99px;
+    }
+
+    &--circle {
+        border-radius: 100%;
+    }
+
+    &--text {
+        padding: 0 !important;
+        border: 0 !important;
+        width: auto !important;
+        &:hover {
+            background-color: transparent !important;
+        }
+    }
+}
